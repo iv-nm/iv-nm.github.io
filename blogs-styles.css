@@ -1,0 +1,141 @@
+:root {
+    --font-color: #333;
+    --background-color: #fff;
+    --header-color: #4b4b4b;
+    --nav-link-color: #1a1a1a;
+    --nav-divider-color: #1a1a1a;
+    --filter-color: #a8a8a8;
+    --filter-hover-color: #6a6a6a;
+    --filter-selected-color: #181818;
+    --iframe-header-title-color: #2a2a2a;
+    --iframe-back-link-color: #333;
+}
+
+body.dark-mode {
+    --font-color: #ccc; /* Lighter text color for dark background */
+    --background-color: #121212; /* Dark background color */
+    --header-color: #e0e0e0; /* Light header text color */
+    --nav-link-color: #e0e0e0; /* Light navigation link color */
+    --nav-divider-color: #444; /* Darker divider color */
+    --filter-color: #888; /* Slightly lighter filter button color */
+    --filter-hover-color: #bbb; /* Even lighter filter button color on hover */
+    --filter-selected-color: #f0f0f0; /* Light color for selected filter */
+    --iframe-header-title-color: #e0e0e0; /* Light color for iframe header title */
+    --iframe-back-link-color: #e0e0e0; /* Light color for back link in iframe */
+}
+
+
+
+body {
+    font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
+    color: var(--font-color);
+    background-color: var(--background-color);
+    margin: 100px;
+    padding: 0 20px; /* Adding side padding */
+}
+
+header {
+    max-width: 800px; /* Set the same max-width as content */
+    margin: 0 auto; /* Center the header */
+    padding: 20px 0;
+    text-align: left; /* Align content to the left */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: var(--header-color);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Add margin-top to create space between title and nav */
+    max-width: 800px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--nav-link-color);
+    position: relative;
+    margin: 0 0px;
+    font-size: 1em;
+}
+
+nav a + a {
+    margin-left: 30px; /* Add margin only to links that follow another link */
+}
+
+nav a:not(.filter):not(:last-child)::after { /* Only apply the lines to non-filter nav links */
+    content: "";
+    position: absolute;
+    right: -15px; /* Adjust this to position the line between links */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1em;
+    background-color: var(--nav-divider-color);
+}
+
+.filter-nav a.filter {
+    text-decoration: none;
+    position: relative;
+    color: var(--filter-color);
+    margin: 0 15px;
+    font-weight: normal;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.filter-nav a.filter:first-child {
+    margin-left: 0; /* Remove left margin for the first filter */
+}
+
+.filter-nav a.filter:hover {
+    text-decoration: none; /* Remove underline on hover */
+    color: var(--filter-hover-color); /* Slightly lighter color on hover */
+}
+
+.filter-nav a.filter.selected {
+    color: var(--filter-selected-color); /* Lighter color for the selected filter */
+}
+
+#blog-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+#blog-list li {
+    margin-bottom: 10px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: var(--nav-link-color); /* Using the same link color variable */
+}
+
+.iframe-header-title {
+    font-size: 2rem;
+    color: var(--iframe-header-title-color);
+    margin: -10px 70px;
+    margin-bottom: 20px;
+}
+
+.iframe-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.iframe-back-link {
+    text-decoration: none;
+    color: var(--iframe-back-link-color);
+    margin-right: 11px;
+    font-size: 1rem;
+}
+
+/* Additional padding for main content if needed */

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+
+
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt;back
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">Understanding Minimalist Design</h1>
+            <h2 class="blog-subtitle">Date: 2024-08-09</h2>
+            <div class="blog-content">
+                <p>Minimalist design is a principle that involves reducing elements to their essential forms. It’s about simplicity, clarity, and functionality. By removing unnecessary details, minimalist design focuses on the essentials, allowing the content to shine.</p>
+
+                <p>The power of minimalist design lies in its ability to communicate messages clearly and effectively. This design approach is characterized by a clean layout, generous white space, and a limited color palette. These elements work together to create a calm and focused user experience.</p>
+
+                <p>When implementing minimalist design, it’s crucial to prioritize content and usability. Each element on the page should serve a purpose. This approach not only enhances the visual appeal of a website but also improves its functionality and user experience.</p>
+
+                <p>In today’s fast-paced digital world, users appreciate the simplicity and ease of use that minimalist design offers. By adopting this approach, designers can create websites that are not only aesthetically pleasing but also highly effective in delivering their intended message.</p>
+            </div>
+        </div>
+    </main>
+</body>
+
+
+<script src="dark-mode.js"></script>
+
+</html>

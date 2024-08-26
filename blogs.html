@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html> <!-- Inline dark mode styles -->
+<head>
+
+    <style>
+
+        /* Styles for normal content */
+        main {
+            padding: 20px;
+        }
+
+        /* Styles applied only when in iframe */
+        .iframe-content {
+            margin-top: -30px; /* Adjust this value to move content lower in iframe */
+            padding-top: 10px; /* Additional padding if needed */
+        }
+    </style>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Filter by Tags</title>
+    <link rel="stylesheet" href="blogs-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <header id="page-header">
+        <!-- Default header content -->
+        <h1>Ivan Makarochkin</h1>
+        <nav>
+            <a href="main.html">Home</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="#">About</a>
+        </nav>
+    </header>
+    <main id="main-content">
+        <aside>
+            <nav class="filter-nav">
+                <a href="#" class="filter" data-tag="all">#all</a>
+                <a href="#" class="filter" data-tag="Jarvis">#jarvis</a>
+                <a href="#" class="filter" data-tag="Telegram">#telegram Bot</a>
+            </nav>
+        </aside>
+        <section>
+            <ul id="blog-list">
+                <li data-tag="Jarvis"><a href="blog1.html">2024-01-06 - Jarvis improved voice recognition</a></li>
+                <li data-tag="Jarvis"><a href="entry2.html">2024-04-01 - Jarvis - New command list</a></li>
+                <li data-tag="Telegram"><a href="entry3.html">2024-06-29 - Telegram bot - Making summary of voice messages</a></li>
+            </ul>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filters = document.querySelectorAll('.filter-nav a.filter');
+            const blogs = document.querySelectorAll('#blog-list li');
+            const mainContent = document.getElementById('main-content');
+            let selectedTag = 'all'; // Default tag
+
+            // Check if the page is opened in an iframe
+            if (window.self !== window.top) {
+                selectedTag = new URLSearchParams(window.location.search).get('tag') || 'Jarvis';
+                
+                // Modify the header for iframe context
+                const header = document.getElementById('page-header');
+                header.innerHTML = `
+                    <h1 class="iframe-header-title"></h1>
+                `;
+                // Apply additional styles
+                header.style.backgroundColor = 'transparent';
+                header.style.position = 'absolute';
+                header.style.top = '60px'; // Positioned 60px from the very top of the screen
+                header.style.left = '0';
+                header.style.width = '100%';
+                header.style.padding = '10px';
+                header.style.borderBottom = 'none'; // Remove border
+                
+                // Apply class to adjust content in iframe
+                mainContent.classList.add('iframe-content');
+            }
+
+            // Set the selected filter based on the context (iframe or not)
+            filters.forEach(filter => {
+                if (filter.getAttribute('data-tag') === selectedTag) {
+                    filter.classList.add('selected');
+                } else {
+                    filter.classList.remove('selected');
+                }
+            });
+
+            // Filter the blogs based on the selected tag
+            filterBlogs(selectedTag);
+
+            // Handle clicks on filter links
+            filters.forEach(filter => {
+                filter.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const tag = this.getAttribute('data-tag');
+
+                    // Update the URL without reloading the page
+                    window.history.pushState({}, '', `?tag=${tag}`);
+
+                    // Update the filter selection
+                    filters.forEach(f => f.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    // Filter the blogs
+                    filterBlogs(tag);
+                });
+            });
+
+            function filterBlogs(tag) {
+                blogs.forEach(blog => {
+                    if (tag === 'all' || blog.getAttribute('data-tag') === tag) {
+                        blog.style.display = '';
+                    } else {
+                        blog.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Include the shared dark mode script -->
+    <script src="dark-mode.js"></script>
+
+</body>
+</html>

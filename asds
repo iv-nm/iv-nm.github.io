@@ -1,0 +1,9 @@
+    <footer>
+        <p>&copy; 2020 You</p>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Writings</a>
+            <a href="#">Tags</a>
+            <a href="#">About</a>
+        </nav>
+    </footer>

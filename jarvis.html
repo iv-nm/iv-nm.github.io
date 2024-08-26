@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Page</title>
+    <link rel="stylesheet" href="project-styles.css"> <!-- Link to external CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+
+    <script>
+        // Apply dark mode immediately based on local storage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark-mode');
+            // Adjust the initial inline styles for dark mode
+            document.documentElement.style.backgroundColor = '#1e1e1e';
+            document.documentElement.style.color = '#ccc';
+        }
+    </script>
+</head>
+<body>
+    <div class="article-section">
+        <a href="main.html" class="home-link">
+            <span class="home-link-icon">&lt;home</span>
+        </a>
+
+        <h1>Jarvis: The AI Assistant</h1>
+
+        <p>Jarvis is an AI assistant inspired by the Iron Man movies. It is designed to help streamline workflows and perform commands/shortcuts efficiently. The core functionality includes voice recognition, command execution, and various integrations with other services.</p>
+        <p>The development of Jarvis began with integrating voice recognition using Vosk for recognizing commands and Picovoice AI for recognizing the wake word. The architecture follows a modular design where services communicate with an EventHandler, which manages the transition between listening for wake words and recognizing commands.</p>
+        <p>One of the key features of Jarvis is its ability to execute commands such as telling the time, opening a browser, or performing specific tasks based on voice input. This is achieved through a CommandHandler that interprets the recognized commands and executes the appropriate actions.</p>
+        <p>The system also includes a TextToSpeechService (TTS) for vocal responses, providing a more interactive user experience. The TTS is integrated into the CommandHandler to respond vocally to recognized commands.</p>
+        <p>In the future, Jarvis aims to include more advanced functionalities such as integrating with smart home devices, providing personalized recommendations, and learning user preferences to improve efficiency.</p>
+        <p>The journey of developing Jarvis has been challenging yet rewarding, with continuous improvements and feature additions. It showcases the potential of AI in simplifying daily tasks and enhancing productivity.</p>
+        <p>As the project evolves, the focus remains on enhancing its capabilities and ensuring a seamless user experience. Jarvis represents a step towards the future of AI-powered assistants, making technology more accessible and user-friendly.</p>
+        <p>Stay tuned for more updates on the development of Jarvis and its upcoming features.</p>
+        <p>Jarvis is built with a strong focus on modularity, allowing each component to be developed, tested, and improved independently. This approach not only enhances the maintainability of the project but also makes it easier to integrate new features and services as they become available.</p>
+        <p>The voice recognition capabilities of Jarvis are powered by state-of-the-art technologies that ensure high accuracy and fast response times. By leveraging models trained on extensive datasets, Jarvis can understand and process voice commands with a high degree of reliability.</p>
+        <p>Command execution is another critical aspect of Jarvis. The CommandHandler component is designed to interpret a wide range of voice commands, from simple tasks like opening applications to more complex sequences of actions. This flexibility makes Jarvis a versatile assistant that can adapt to various use cases.</p>
+        <p>Integration with external services is a key feature of Jarvis. Whether it's connecting to smart home devices, accessing online information, or interfacing with other software, Jarvis is equipped to handle a wide array of interactions. This extensibility ensures that Jarvis remains relevant and useful in an ever-evolving technological landscape.</p>
+        <p>The user interface of Jarvis is designed to be intuitive and user-friendly. Voice feedback provided by the TextToSpeechService (TTS) ensures that users receive clear and immediate responses to their commands. This interactive approach enhances the overall user experience, making Jarvis not just a tool, but a helpful companion.</p>
+        <p>One of the exciting future directions for Jarvis is the incorporation of machine learning algorithms that can learn from user interactions. By analyzing patterns and preferences, Jarvis can become more personalized and proactive, anticipating user needs and providing tailored recommendations.</p>
+        <p>Security and privacy are also paramount in the design of Jarvis. Measures are in place to ensure that user data is handled responsibly and that interactions with the assistant remain confidential. This commitment to security builds trust and confidence among users.</p>
+        <p>In summary, Jarvis is a cutting-edge AI assistant that combines advanced voice recognition, robust command execution, and seamless integration with external services. Its modular architecture and focus on user experience make it a powerful tool for enhancing productivity and simplifying everyday tasks. As development continues, Jarvis is poised to become an indispensable assistant for users everywhere.</p>
+        <p>Thank you for following the journey of Jarvis. Stay tuned for more updates and new features as we continue to push the boundaries of what's possible with AI-powered assistants.</p>
+    </div>
+    <div class="iframe-section">
+        <iframe src="blogs.html?tag=Jarvis"></iframe>
+    </div>
+
+    <!-- Include the shared dark mode script -->
+    <script src="dark-mode.js"></script>
+</body>
+</html>
