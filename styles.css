@@ -19,6 +19,7 @@ body.dark-mode {
 }
 
 body {
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
     color: var(--font-color);
     background-color: var(--background-color);
@@ -231,4 +232,76 @@ body.dark-mode .dark-mode-toggle i.fa-sun {
 
 .overlay.show img {
     transform: scale(1);
+}
+
+
+
+
+@media (max-width: 768px) {
+    body {
+        margin: 20px; /* Reduce the margin for smaller screens */
+        padding: 0 10px;
+    }
+
+    header h1 {
+        font-size: 1.5em; /* Reduce the font size for the header */
+        text-align: center; /* Center the header text */
+    }
+
+    nav {
+        flex-direction: column; /* Stack the navigation links */
+        align-items: center; /* Center the navigation links */
+        margin-top: 20px; /* Add more space between header and nav */
+    }
+
+    nav a {
+        margin: 10px 0; /* Increase the space between links */
+        text-align: center; /* Center text in the nav links */
+    }
+
+    .intro, .projects, .writings, .artworks {
+        max-width: 100%; /* Allow full width on smaller screens */
+        margin: 20px auto; /* Adjust margins */
+        padding: 0 10px; /* Adjust padding for smaller screens */
+    }
+
+    .artwork-collage {
+        grid-template-columns: repeat(6, 1fr); /* Reduce columns on mobile */
+    }
+
+    .artwork-collage img {
+        border-radius: 5px; /* Smaller border radius */
+    }
+
+    .dark-mode-toggle {
+        top: 10px; /* Adjust positioning for smaller screens */
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2em; /* Further reduce font size on very small screens */
+    }
+
+    nav {
+        margin-top: 10px; /* Reduce space between header and nav */
+    }
+
+    nav a {
+        font-size: 0.9em; /* Reduce font size of nav links */
+    }
+
+    .artwork-collage {
+        grid-template-columns: repeat(4, 1fr); /* Further reduce columns */
+        gap: 5px; /* Reduce gap between images */
+    }
+
+    .artwork-collage img {
+        transform: scale(1.03); /* Reduce the hover effect scaling */
+    }
+
+    .dark-mode-toggle {
+        font-size: 0.9em; /* Reduce the size of the dark mode toggle */
+    }
 }
