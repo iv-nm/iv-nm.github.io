@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt; back
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">Improved voice recognition</h1>
+            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <div class="blog-content">
+               
+            <p>When using a voice assistant, it's much more convenient if it continues listening after executing a command, rather than requiring you to repeat the wake word each time. This allows you to give multiple commands to assistant in a row without interruptions. </p>
+            <p>In the new recognition method, Jarvis will listen for 7 seconds after completing the first command. If no command is detected during this timeout, it will return to listening for the wake word again.</p>
+
+                <p>This is the scheme of new approach for listening to command, after detecting wake word:</p>
+
+                <div class="code-container">
+                    <pre><code class="language-markdown">
+    Start Listening
+        |
+    Check recognized_text
+        |
+    +-----------------------------------------------+
+    |  Is recognized_text == "Silence"?             |
+    |                                               |
+    |      Yes                                      |     No
+    |       |                                       |      |
+    |   Silence detected                            |  Command recognized
+    |       |                                       |      |
+    |   Start 7-second timeout                      |  Stop listening
+    |       |                                       |      |
+    |   +----------------------------------------+  |  Process and execute command
+    |   | Keep listening during timeout          |  |
+    |   +----------------------------------------+  |
+    |       |                                       |
+    |   Is command recognized during timeout?       |
+    |       |                                       |
+    |    Yes                                        |    No
+    |       |                                       |
+    |  Stop listening                               | Timeout expires
+    |  Process and execute command                  | Return to wake word listening
+    |       |                                       |
+    |   Break the loop                              |
+    +-----------------------------------------------+
+                    </code></pre>
+            
+                </div>
+                <p>This is the python code of algorithm above:</p>
+
+
+                <div class="code-container">
+                    <pre><code class="language-python">
+def wait_for_command(self):
+    while True:
+        print("Listening for command...")
+        recognized_text = self.vosk_service.start_listening()
+                    
+        if recognized_text == "Silence":
+            print("Silence detected. Waiting for 7 seconds.")
+            start_time = time.time()
+                    
+            while time.time() - start_time < 7:  # timeout duration = 7 sec
+                print("Listening for command during timeout...")
+                recognized_text = self.vosk_service.start_listening()
+                    
+                if recognized_text != "Silence":
+                    print("Command recognized during timeout:", recognized_text)
+                    
+                    self.vosk_service.stop_listening()
+                    
+                    # Send the recognized text to the command handler module
+                    process_and_execute(recognized_text)
+                    break
+                    
+            else: 
+                print("No command detected in 7 seconds. Returning to wake word listening.")
+                return  # Return to wake word detection if no command is recognized
+        else:
+            print("Command recognized:", recognized_text)
+                    
+            self.vosk_service.stop_listening()
+            # Send the recognized text to the command handler module                    
+            process_and_execute(recognized_text)
+                    </code></pre>
+            
+                </div>
+
+
+<p>That approach allows to chain commands and user don't need to say Jarvis(Wake Word) every time.
+
+ 
+
+        </div>
+        </div>
+    </main>
+
+
+
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+
+<script src="../dark-mode.js"></script>
+
+
+</body>
+</html>
+
+
+

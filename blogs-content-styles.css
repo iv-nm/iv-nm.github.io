@@ -1,9 +1,9 @@
 :root {
     --primary-color: #333; /* Primary text color */
-    --secondary-color: #777; /* Subtitle text color */
+    --secondary-color: #313131; /* Subtitle text color */
     --accent-color: #555; /* Blog content text color */
     --background-color: white; /* Background color */
-    --box-shadow-color: rgba(0, 0, 0, 0.1); /* Box shadow color */
+    --box-shadow-color: rgba(0, 0, 0, 0.0); /* Box shadow color */
     --hover-color: #171717; /* Hover color for the back button */
     --link-color: #838383;
     --iframe-shadow-color: rgba(0, 0, 0, 0)
@@ -11,12 +11,14 @@
 
 body.dark-mode {
     --primary-color: #ccc;
-    --secondary-color: #aaa;
+    --secondary-color: #d8d8d8;
     --accent-color: #bbb;
     --background-color: #121212;
-    --box-shadow-color: rgba(0, 0, 0, 0.1); /* Lightened box shadow color */
+    --box-shadow-color: rgba(0, 0, 0, 0.0); /* Lightened box shadow color */
     --hover-color: #cacaca; /* Hover color for dark mode */
 }
+
+
 
 body {
     font-family: 'JetBrains Mono', monospace;
@@ -26,10 +28,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
     position: relative; /* Added to position the home link absolutely */
 }
+
+
+
 
 .home-link {
     text-decoration: none;
@@ -37,12 +42,13 @@ body {
 
     font-size: 1em;
     position: absolute;
-    top: 20px; /* Default position when not in iframe */
-    left: 20px; /* Positioned at the left */
+    top: 40px; /* Default position when not in iframe */
+    left: 40px; /* Positioned at the left */
     transition: color 0.3s ease; /* Smooth transition for color change */
+
 }
 
-.home-link-icon {
+ .home-link-icon {
     margin-right: 5px;
 }
 
@@ -63,7 +69,7 @@ body {
 .blog-title {
     font-size: 2em;
     color: var(--primary-color); /* Use primary color variable */
-    margin-bottom: 10px;
+    
     text-align: left;
 }
 
@@ -86,8 +92,92 @@ body {
 }
 
 .iframe-mode .blog-container {
-    margin-top: -0px; /* Move the content higher when in iframe */
+    margin-top: 50px; /* Move the content higher when in iframe */
     box-shadow: var(--iframe-shadow-color);
-    width:90%;
+
+    width:100%;
+    max-width: 700px;
+
 }
+
+img {
+    width: 300px;
+    border-radius: 10px;
+    float: right; /* Float the image to the left */
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color); /* Using the same link color variable */
+
+}
+
+.text_link 
+{
+    border-bottom: 1px dashed #7e797995;
+}
+
+
+
+
+.code-container {
+    background-color: #202020;
+    color: hsl(212, 100%, 87%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto; /* Enable horizontal scrolling when content overflows */
+    overflow-y: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    max-width: 800px; /* Limit container width to 650px */
+    width: 100%; /* Allow the container to shrink on smaller screens */
+    margin-left: var(--margin-align);
+    display: block; /* Ensure block-level behavior for width properties */
+
+}
+
+pre {
+    margin: 0;
+    white-space: pre; /* Preserve whitespaces and prevent wrapping */
+    padding: 0;
+    text-align: left;
+    overflow: visible; /* Let the container handle overflow */
+}
+
+code {
+    display: block;
+    padding: 0;
+    text-align: left;
+}
+
+
+
+.token.keyword {
+    color: #ff5dd4; /* Blue for keywords */
+}
+
+.token.string {
+    color: #ffa37e; /* Orange for strings */
+}
+
+.token.function {
+    color: #ffff79; /* Yellow for function calls */
+}
+
+.token.comment {
+    color: #6A9955; /* Green for comments */
+}
+
+.token.builtin {
+    color: #fffca5; /* Green for comments */
+}
+
+.token.punctuation {
+    color: #e4e4e4; /* Green for comments */
+}
+.token.variable, .token.parameter {
+    color: #9CDCFE; /* Light blue for variables and parameters */
+}
+
 

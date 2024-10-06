@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt; back
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">Implementing modes</h1>
+            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <div class="blog-content">
+
+                <p>As for modes, I decided to make methods that will open app:</p>
+
+                
+
+                <div class="code-container">
+                    <pre><code class="language-python">class AppLauncher:
+    @staticmethod
+    def open_brave():
+        """ Open Brave """
+        try:
+            subprocess.Popen(["open", "-a", "Brave"])
+            print("Visual Studio Code is opened.")
+        except Exception as e:
+            print(f"Failed to open Visual Studio Code: {e}")
+
+
+    @staticmethod
+    def open_vs_code():
+        """ Open Visual Studio Code """
+        try:
+            subprocess.Popen(["code"])  # 'code' is the command to open VS Code
+            print("Visual Studio Code is opened.")
+        except Exception as e:
+            print(f"Failed to open Visual Studio Code: {e}")
+
+    @staticmethod
+    def open_spotify():
+        """ Open Yandex Music in the default web browser """
+        try:
+            subprocess.Popen(["open", "-a", "Spotify"])
+            print("Spotify is opened.")
+        except Exception as e:
+            print(f"Failed to open Spotify: {e}")
+    #etc.</code></pre>
+                </div>
+
+        <p>Then I can use this methods for mode configuration:</p>
+        <div class="code-container">
+            <pre><code class="language-python">def work_mode():
+    print("Launching")
+    launcher = AppLauncher()
+    launcher.open_vs_code()          # Open Visual Studio Code
+    launcher.open_spotify()          # Open Spotify
+    launcher.open_telegram()         # Open Telegram
+    launcher.open_chatgpt_in_brave() # Open ChatGPT in Brave browser</code></pre></div>
+        
+
+        </div>
+        </div>
+    </main>
+
+
+
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+
+<script src="../dark-mode.js"></script>
+
+
+</body>
+</html>
+
+
+

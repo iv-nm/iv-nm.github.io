@@ -19,33 +19,130 @@
 </head>
 <body>
     <div class="article-section">
-        <a href="index.html" class="home-link">
-            <span class="home-link-icon">&lt;home</span>
+        <a href="main.html" class="home-link">
+            <span class="home-link-icon">&lt; home</span>
         </a>
 
-        <h1>Jarvis: The AI Assistant</h1>
+        <h1>Jarvis: Building a Voice Assistant</h1>
 
-        <p>Jarvis is an AI assistant inspired by the Iron Man movies. It is designed to help streamline workflows and perform commands/shortcuts efficiently. The core functionality includes voice recognition, command execution, and various integrations with other services.</p>
-        <p>The development of Jarvis began with integrating voice recognition using Vosk for recognizing commands and Picovoice AI for recognizing the wake word. The architecture follows a modular design where services communicate with an EventHandler, which manages the transition between listening for wake words and recognizing commands.</p>
-        <p>One of the key features of Jarvis is its ability to execute commands such as telling the time, opening a browser, or performing specific tasks based on voice input. This is achieved through a CommandHandler that interprets the recognized commands and executes the appropriate actions.</p>
-        <p>The system also includes a TextToSpeechService (TTS) for vocal responses, providing a more interactive user experience. The TTS is integrated into the CommandHandler to respond vocally to recognized commands.</p>
-        <p>In the future, Jarvis aims to include more advanced functionalities such as integrating with smart home devices, providing personalized recommendations, and learning user preferences to improve efficiency.</p>
-        <p>The journey of developing Jarvis has been challenging yet rewarding, with continuous improvements and feature additions. It showcases the potential of AI in simplifying daily tasks and enhancing productivity.</p>
-        <p>As the project evolves, the focus remains on enhancing its capabilities and ensuring a seamless user experience. Jarvis represents a step towards the future of AI-powered assistants, making technology more accessible and user-friendly.</p>
-        <p>Stay tuned for more updates on the development of Jarvis and its upcoming features.</p>
-        <p>Jarvis is built with a strong focus on modularity, allowing each component to be developed, tested, and improved independently. This approach not only enhances the maintainability of the project but also makes it easier to integrate new features and services as they become available.</p>
-        <p>The voice recognition capabilities of Jarvis are powered by state-of-the-art technologies that ensure high accuracy and fast response times. By leveraging models trained on extensive datasets, Jarvis can understand and process voice commands with a high degree of reliability.</p>
-        <p>Command execution is another critical aspect of Jarvis. The CommandHandler component is designed to interpret a wide range of voice commands, from simple tasks like opening applications to more complex sequences of actions. This flexibility makes Jarvis a versatile assistant that can adapt to various use cases.</p>
-        <p>Integration with external services is a key feature of Jarvis. Whether it's connecting to smart home devices, accessing online information, or interfacing with other software, Jarvis is equipped to handle a wide array of interactions. This extensibility ensures that Jarvis remains relevant and useful in an ever-evolving technological landscape.</p>
-        <p>The user interface of Jarvis is designed to be intuitive and user-friendly. Voice feedback provided by the TextToSpeechService (TTS) ensures that users receive clear and immediate responses to their commands. This interactive approach enhances the overall user experience, making Jarvis not just a tool, but a helpful companion.</p>
-        <p>One of the exciting future directions for Jarvis is the incorporation of machine learning algorithms that can learn from user interactions. By analyzing patterns and preferences, Jarvis can become more personalized and proactive, anticipating user needs and providing tailored recommendations.</p>
-        <p>Security and privacy are also paramount in the design of Jarvis. Measures are in place to ensure that user data is handled responsibly and that interactions with the assistant remain confidential. This commitment to security builds trust and confidence among users.</p>
-        <p>In summary, Jarvis is a cutting-edge AI assistant that combines advanced voice recognition, robust command execution, and seamless integration with external services. Its modular architecture and focus on user experience make it a powerful tool for enhancing productivity and simplifying everyday tasks. As development continues, Jarvis is poised to become an indispensable assistant for users everywhere.</p>
-        <p>Thank you for following the journey of Jarvis. Stay tuned for more updates and new features as we continue to push the boundaries of what's possible with AI-powered assistants.</p>
+        <p>When I watched Iron Man, I was captivated by Tony Stark’s AI assistant, Jarvis. The idea of having a voice assistant that not only responded to commands, optimized daily tasks and improved productivity, but also able to communicate and interact in human manner inspired me. I set out to create my version of Jarvis—an AI-powered assistant designed not just for show but for real-world functionality.</p>
+
+        <h2>The Vision: Beyond Simple Commands</h2>
+
+        <p>Many voice assistants projects today can tell you the time or give you the weather forecast, but I wanted to create something more profound. My goal was to develop a voice assistant that could genuinely optimize my workflow, automate routine tasks, and seamlessly integrate into computer to control it. Jarvis should be more than just a novelty; it should be a tool that enhances productivity and simplifies complex tasks.</p>
+
+        <h2>The Journey: Building the Core</h2>
+
+        <p>Creating such a tool required more than just off-the-shelf solutions. I needed a solid foundation that could handle the nuances of natural language processing and command recognition. After multiple iterations and rebuilding the core logic, I finally developed a robust base that could support the features I envisioned.
+        To detect the wake word, I integrated Picovoice AI, a reliable and efficient solution that ensures Jarvis is always ready when called upon. Wake word is needed for fast assistant activation, as it takes much less time to detect one word from sound flow, then listen and process everything. For speech recognition, I opted for Vosk, a model known for its speed and support for multiple languages. This combination allowed me to create a versatile assistant capable of understanding and processing various languages without compromising performance.</p>
+
+        <p>Jarvis listens for the wake word using the Picovoice model, which excels in quickly detecting the word "Jarvis" in real-time, ensuring fast activation.</p>
+
+
+        <div class="code-container">
+            <pre><code class="language-python">
+def listen(self):
+    self.recorder.start()
+    while self.active:
+        pcm = self.recorder.read()
+        keyword_index = self.porcupine.process(pcm)
+        if keyword_index >= 0:
+            self.event_queue.put(('detected', 'Jarvis'))
+    self.recorder.stop()
+            </code></pre>
+
+        </div>
+
+
+
+        <p>Once the wake word is detected, the assistant switches to listening for the command using the Vosk speech-to-text library. I chose Vosk because of its speed and its ability to support multiple languages, making it ideal for a versatile voice assistant. However, it doesn’t accurate sometimes, that's enough in my case. I've created several methods for convinient activation and stopping when needed.</p>
+        
+        
+        <div class="code-container">
+            <pre><code class="language-python">
+                
+self.vosk_service.start_listening() #starts listening, returns recognized string 
+self.vosk_service.start_listening() #stops listening until activated
+            </code></pre>
+
+        </div>
+        
+        
+        <p>After capturing the command, the input string is processed by removing unnecessary words and isolating key action words like "open", "close" etc. I then use the Jaro-Winkler algorithm to compare the command with a predefined list of actions. This algorithm compares input and predefined command letter by letter and them calculate simmilarity score. ensuring accurate matching even if the phrasing isn't exact. </p> 
+
+        <div class="code-container">
+            <pre><code class="language-python"># compare input string with predefined commands and return command variable with recognized command
+
+from jellyfish import jaro_winkler_similarity
+    command = rc['cmd']
+    if rc['similarity'] >= self.similarity_threshold:
+        print(f"Processing command: {command}")
+        self._execute_command_logic(command)
+        return True  # Command was recognized and processed
+    else:
+        return False  # Command was not recognized
+            </code></pre>
+
+
+        </div>
+
+
+        <p>This triggers the appropriate action, allowing Jarvis to carry out tasks fast.</p>
+
+
+        <h2>The Experience: Bringing Jarvis to Life</h2>
+
+        <p>A crucial aspect of Jarvis is its text-to-speech (TTS) capability. That's a huge part od user experience if Jarvis can speak in human manner. I think the best tts tool now is Eleven Labs. It provides high-quality, multi-language speech generation, ensuring that Jarvis doesn’t just sound like a machine but communicates fluently and naturally. However the big issue with Eleven Labs that they process input on their server, in contrast of other tools that I run locally on the machine. Although it works pretty fast.</p>
+
+    <audio autoplay controls>
+        <source src="eleven_labs_1.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+        <h2>Commands</h2>
+
+        <p>After we know what exactly user sad and what action they want to run, I created commands and shortcuts</p>
+        <p>By searching for action words it can process complex commands that contain several actions:</p>
+        <p>Input: "open the browser, spotify and close the download folder"</p>
+
+
+
+        <div class="code-container">
+            <pre><code class="language">
+    #The actual list of actions Jarvis can perform smoothly:
+    time
+    weather
+    controlling focus modes on mac
+    opening apps and folders
+    closing apps
+
+    #Modes:
+    Work mode: opens browser, vs code and music app
+    Game mode: ends all process, opens steam and discord
+            </code></pre>
+        </div>
+
+        <p>The journey to create Jarvis has been both challenging and rewarding. My primary goal was to create a voice assistant that could truly be useful in my work process—not just a tool for telling time or delivering basic information, but a versatile assistant that could automate tasks, control the environment, and manage information efficiently.
+        While the list of commands is continuously evolving, some essentials include making notes, providing information like time and weather, opening programs, and controlling different modes such as focus or gaming mode. As I continue to refine and expand Jarvis, I’m excited about the potential to add even more sophisticated functions.
+        In the end, Jarvis is not just a project inspired by a movie. It’s a practical tool designed to enhance productivity and streamline the way I work. By focusing on a strong foundation and continuously improving its capabilities, I aim to make Jarvis a voice assistant that truly serves its purpose—making life a little easier and a lot more efficient.</p>
+
+
+
+        
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+
+
+    
+
     </div>
     <div class="iframe-section">
         <iframe src="blogs.html?tag=Jarvis"></iframe>
     </div>
+
+    
 
     <!-- Include the shared dark mode script -->
     <script src="dark-mode.js"></script>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt; back
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">New speech-to-text</h1>
+            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <div class="blog-content">
+
+                <p>When I first started building my voice assistant, I used <strong>Google Speech Recognition</strong> for converting speech to text. However it wasn't fast enough. The main issue was its reliance on an internet connection. Every time a command was spoken, the audio had to be sent to Google's servers for processing, which caused a huge delay.</p>
+
+                <p>To improve performance, I switched to <strong>Vosk</strong>, an open-source speech recognition system that runs locally. By processing everything directly on the machine, Vosk doesn't nrrd the internet connection what significantly reduces the delay.</p>
+                
+
+                <div class="code-container">
+                    <pre><code class="language-python">def start_listening(self):
+    if not self.is_listening:
+        self.is_listening = True
+        self.recognized_text = None
+        self.thread = threading.Thread(target=self._listen)
+        self.thread.start()
+        self.thread.join()  # Wait for the thread to finish
+        return self.recognized_text
+                
+def stop_listening(self):
+    if self.is_listening:
+        self.is_listening = False
+        if self.thread is not None:
+            self.thread.join()
+            self.thread = None</code></pre>
+                </div>
+
+        <p>This methods allows to conviniently handle the command recognition</p>
+
+        </div>
+        </div>
+    </main>
+
+
+
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+
+<script src="../dark-mode.js"></script>
+
+
+</body>
+</html>
+
+
+

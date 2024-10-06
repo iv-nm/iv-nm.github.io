@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Ivan Makarochkin</h1>
+            <nav>
+                <a href="main.html">Home</a>
+                <a href="blogs.html">Blog</a>
+                <a href="#">About</a>
+            </nav>
+        </header>
+
+
+        <section class="intro">
+            <p>I'm a dedicated WVSS student passionate about programming and software development...</p>
+            <p><a href="#">GitHub</a> <a href="#">Email</a></p>
+        </section>
+
+        <section class="projects">
+            <h2>Projects</h2>
+            <ul>
+                <li><a href="jarvis.html">Jarvis: Voice Assistant with integrated neural networks for controlling computer</a></li>
+                <li><a href="#">Telegram Bot: Telegram messenger bot for voice messages to text</a></li>
+                <li><a href="#">Boardgame app: Boardgames score counter for competing with friends</a></li>
+            </ul>
+        </section>
+
+        <section class="writings">
+            <h2>Blog</h2>
+            <ul>
+                <li><a href="blog1.html">2024-01-06 - Jarvis improved voice recognition</a></li>
+                <li><a href="blog.html">2024-04-01 - Jarvis - New command list</a></li>
+                <li><a href="blog.html">2024-06-29 - Telegram bot - Making summary of voice messages</a></li>
+            </ul>
+        </section>
+
+        <section class="artworks">
+            <h2>Artwork</h2>
+            <div class="artwork-collage">
+                <img src="art1.jpg" alt="Artwork 1">
+                <img src="art2.jpg" alt="Artwork 2">
+                <img src="art3.jpg" alt="Artwork 3">
+                <img src="art4.jpg" alt="Artwork 4">
+                <img src="art5.jpg" alt="Artwork 5">
+                <img src="art6.jpg" alt="Artwork 6">
+                <img src="art7.jpg" alt="Artwork 7">
+            </div>
+        </section>
+    </main>
+
+    <div id="fullScreenOverlay" class="overlay">
+        <img id="fullScreenImage" src="" alt="Full Screen View">
+    </div>
+
+    <button class="dark-mode-toggle" id="darkModeToggle">
+        <i id="toggle-icon" class="fas fa-moon"></i>
+    </button>
+
+    <script src="dark-mode.js"></script>
+
+    <!-- Full-screen preview JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.artwork-collage img');
+            const overlay = document.getElementById('fullScreenOverlay');
+            const fullScreenImage = document.getElementById('fullScreenImage');
+
+            images.forEach(image => {
+                image.addEventListener('click', () => {
+                    fullScreenImage.src = image.src;
+                    overlay.style.display = 'flex';
+                    setTimeout(() => {
+                        overlay.classList.add('show');
+                    }, 10); // Small delay to allow the transition effect
+                });
+            });
+
+            const closeOverlay = () => {
+                overlay.classList.remove('show');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300); // Match this delay with the transition duration
+            };
+
+            overlay.addEventListener('click', (event) => {
+                if (event.target !== fullScreenImage) {
+                    closeOverlay();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' || event.key === ' ') {
+                    closeOverlay();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -9,6 +9,7 @@
     --link-color-hovered: #171717;
     --body-bg-color: rgb(240, 240, 240); /* Added variable for body background color */
     --box-shadow-color: rgba(0, 0, 0, 0.1); /* Added variable for box shadow color */
+    --margin-align: 30px;
 }
 
 html.dark-mode {
@@ -33,22 +34,37 @@ body {
     color: var(--font-color); /* Use the variable for font color */
 }
 
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
 .article-section {
     flex: 1;
     padding: 40px;
     overflow-y: auto;
-    background-color: var(--background-color); /* Use the variable for article background color */
-    box-shadow: 0 4px 6px var(--box-shadow-color); /* Use the variable for box shadow color */
+    background-color: var(--background-color);
+    box-shadow: 0 4px 6px var(--box-shadow-color);
     margin: 20px;
     border-radius: 10px;
 }
 
 h1 {
+    margin-left:var(--margin-align);    
     font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
     font-size: 2em;
     color: var(--header-color); /* Use the variable for header color */
 }
-
+p {
+    margin-left:var(--margin-align);
+    max-width: 650px;
+}
+h2 {
+    margin-left:var(--margin-align);
+    color: var(--header-color); /* Use the variable for header color */
+}
 .home-link {
     display: block;
     margin-bottom: 20px; /* Space between home link and content */
@@ -69,9 +85,85 @@ h1 {
     padding: 20px;
 }
 
+/* Responsive iframe */
 .iframe-section iframe {
     width: 100%;
     height: 100%;
+    min-height: 500px; /* Ensure iframe has a minimum height */
     border: none;
     border-radius: 10px;
 }
+
+/* Make the page responsive for smaller screens */
+
+
+
+
+.code-container {
+    background-color: #202020;
+    color: hsl(212, 100%, 87%);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto; /* Enable horizontal scrolling when content overflows */
+    overflow-y: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    max-width: 630px; /* Limit container width to 650px */
+    width: 100%; /* Allow the container to shrink on smaller screens */
+    margin-left: var(--margin-align);
+    display: block; /* Ensure block-level behavior for width properties */
+}
+
+pre {
+    margin: 0;
+    white-space: pre; /* Preserve whitespaces and prevent wrapping */
+    padding: 0;
+    text-align: left;
+    overflow: visible; /* Let the container handle overflow */
+}
+
+code {
+    display: block;
+    padding: 0;
+    text-align: left;
+}
+
+
+
+
+
+
+.token.keyword {
+    color: #ff5dd4; /* Blue for keywords */
+}
+
+.token.string {
+    color: #ffa37e; /* Orange for strings */
+}
+
+.token.function {
+    color: #ffff79; /* Yellow for function calls */
+}
+
+.token.comment {
+    color: #6A9955; /* Green for comments */
+}
+
+.token.builtin {
+    color: #fffca5; /* Green for comments */
+}
+
+.token.punctuation {
+    color: #e4e4e4; /* Green for comments */
+}
+.token.variable, .token.parameter {
+    color: #9CDCFE; /* Light blue for variables and parameters */
+}
+
+
+
+audio{
+    margin-left: var(--margin-align);
+}
+
+
