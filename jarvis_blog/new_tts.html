@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt; back
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">New text-to-speech</h1>
+            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <div class="blog-content">
+
+                <p>In first version I used pyaudio for coverting speech to text, however it wasn't quite realistic. That's why I decided to use Eleven Labs. It will work perfectly in my case, it's multilanguage and generates high quallity speech. </p>
+
+                
+
+                <div class="code-container">
+                    <pre><code class="language-python">class TTSService:
+def __init__(self, api_key):
+    self.client = ElevenLabs(api_key=api_key)
+    self.voice = "PmQgD9hinEVn8YJXrTGy"
+    self.model = "eleven_multilingual_v2"
+                    
+def play(self, text):
+    audio = self.client.generate(
+        text=text,
+        voice=self.voice,
+        model=self.model
+    )
+    play(audio)</code></pre>
+                </div>
+
+        <p>With this code I can simply pass phrase to the play function.</p>
+        <p>The only thing is that Eleven Labs process input on server and it works with delay, however I think quallity worth it.</p>
+
+        </div>
+        </div>
+    </main>
+
+
+
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+
+<script src="../dark-mode.js"></script>
+
+
+</body>
+</html>
+
+
+

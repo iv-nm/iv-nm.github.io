@@ -30,8 +30,8 @@ body {
     font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
     color: var(--font-color);
     background-color: var(--background-color);
-    margin: 100px;
-    padding: 0 20px; /* Adding side padding */
+ 
+    padding: 100px 50px; /* Adding side padding */
 }
 
 header {
@@ -110,12 +110,16 @@ nav a:not(.filter):not(:last-child)::after { /* Only apply the lines to non-filt
 }
 
 #blog-list li {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+ 
+    margin: 10px 0;
+
 }
 
 ul li a {
     text-decoration: none;
     color: var(--nav-link-color); /* Using the same link color variable */
+    border-bottom: 1px dashed #7e797995;
 }
 
 .iframe-header-title {
@@ -129,6 +133,7 @@ ul li a {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    padding-top: 100px;
 }
 
 .iframe-back-link {

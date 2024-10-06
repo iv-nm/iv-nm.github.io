@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt; back
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">New command processing</h1>
+            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <div class="blog-content">
+
+                <p>I want to fix big issue with command processing, especially opening apps and folders. I want to mix multiple commands into one input, for example, "open the browser and downloads folder," instead of saying each command separately. I have decided to improve the current logic to handle multiple commands in a single input.</p>
+
+                <p>When a command is recognized, the system first preprocesses the input by removing noise words and aliases (e.g., "please" or "hey"). After preprocessing, it checks if the command includes an action, such as "open" or "close." If an action is detected, then it will identify an object like browser or music and will execute appropriate function, such as opening an app. If no action is found, the command is processed using a standard command configuration, matching it to predefined commands like "what is the time?".</p>
+                <div class="code-container">
+                    <pre><code class="language-markdown">
+        Start Listening
+            |
+            v
+        Check recognized_command
+            |
+            v
+        +----------------------------------------+
+        | Is action recognized from command?     |
+        |----------------------------------------|
+        | Yes                                    | No
+        |                                        |  
+        | Action recognized                      |  
+        | |                                      |  
+        | v                                      |  
+        | Execute action with objects            | Process as a standard command
+        | |                                      |  
+        | v                                      |  
+        | Open apps based on objects             | Match the command from Config
+        | (e.g., browser, music)                 |  
+        | |                                      |  
+        | v                                      |  
+        | Process and execute command logic      | Execute matched command logic
+        | (e.g., open_app, focus_mode)           | (e.g., joke, open_browser, etc.)
+        |                                        |  
+        |----------------------------------------|
+                            v
+        +----------------------------------------+
+        |    Output result (speech or action)    |  
+        +----------------------------------------+
+                            v
+                           End
+                    </code></pre>
+            
+                </div>
+                <p>First, Jarvis will preprocess the input by removing noise words and extracting action words and objects:</p>
+
+
+    <div class="code-container">
+        <pre><code class="language-python">import random
+def _preprocess(self, command: str) -> str:
+        """ Preprocess the command by removing aliases and noise words. """
+        command = command.lower().strip()  # Convert command to lowercase and remove extra spaces
+        
+        # Remove all aliases and noise words from the command
+        for word in Config.VA_ALIAS + Config.VA_TBR:
+            command = command.replace(word, "")
+        
+        return command.strip()  # Return the cleaned command
+
+    def _extract_action_objects(self, command: str):
+        """ Extract action and associated objects (like apps) from the command. """
+        
+        # Check if an action like 'open' exists in the command
+        action = next((a for a in Config.VA_ACTIONS if a in command), None)
+        
+        # Find objects (e.g., browser, vscode) by comparing command with predefined variations
+        objects = [obj for obj, variations in Config.VA_OBJECTS.items()
+                   if any(jaro_winkler_similarity(command, var) > self.similarity_threshold for var in variations)]
+        
+        return action, objects  # Return the extracted action and objects
+        </code></pre>
+    </div>
+
+    <p>Then Jarvis execute appropriate command, comparing input with predefined commands.</p>
+
+
+
+                <div class="code-container">
+                    <pre><code class="language-python">import random
+import webbrowser
+from jellyfish import jaro_winkler_similarity
+from command_config import Config
+import functions
+
+class CommandHandler:
+        # Set a threshold for command similarity matching
+        self.similarity_threshold = 0.85
+
+    def execute_command(self, command: str) -> bool:
+        """ Main method to execute a recognized command. 
+        Extracts action and objects or processes as a standard command. """
+        # Preprocess the command (cleaning aliases/noise words)
+        command = self._preprocess(command)
+        
+        # Try to extract action and objects from the command
+        action, objects = self._extract_action_objects(command)
+
+        if action == 'open':
+            # Execute action (e.g., open app)
+            functions.open_app(objects)
+            return True
+        else:
+            # Handle as a standard command
+            return self._process_standard_command(command)
+
+    def _process_standard_command(self, command: str) -> bool:
+        """ Handle commands that don't have an action, like jokes or opening a browser. """
+        
+        # Find the best matching command from the predefined command list
+        cmd = max(Config.VA_CMD_LIST, key=lambda c: max(jaro_winkler_similarity(command, v) for v in Config.VA_CMD_LIST[c]))
+        
+        # If the command matches the threshold, execute the corresponding logic
+        if jaro_winkler_similarity(command, cmd) > self.similarity_threshold:
+            if cmd == 'ctime':
+                # Tell a random joke
+                print(random.choice(['Why do programmers prefer dark mode? Because light attracts bugs!']))
+            return True  # Command successfully processed
+        return False  # Command not recognized
+                    </code></pre>
+                </div>
+
+
+
+
+
+
+        </div>
+        </div>
+    </main>
+
+
+
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+
+<script src="../dark-mode.js"></script>
+
+
+</body>
+</html>
+
+
+

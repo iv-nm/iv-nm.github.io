@@ -1,0 +1,234 @@
+:root {
+    --font-color: #333;
+    --background-color: #fff;
+    --header-color: #4b4b4b;
+    --nav-link-color: #1a1a1a;
+    --nav-divider-color: #1a1a1a;
+    --subheading-color: #4b4b4b;
+    --link-color: #171717;
+}
+
+body.dark-mode {
+    --font-color: #ccc;
+    --background-color: #121212;
+    --header-color: #e0e0e0;
+    --nav-link-color: #e0e0e0;
+    --nav-divider-color: #444;
+    --subheading-color: #e0e0e0;
+    --link-color: #e0e0e0;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
+    color: var(--font-color);
+    background-color: var(--background-color);
+    margin: 100px;
+    padding: 0 20px; /* Adding side padding */
+}
+
+header {
+    max-width: 800px; /* Set the same max-width as content */
+    margin: 0 auto; /* Center the header */
+    padding: 20px 0;
+    text-align: left; /* Align content to the left */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: var(--header-color);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Add margin-top to create space between title and nav */
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--nav-link-color);
+    position: relative;
+}
+
+nav a + a {
+    margin-left: 30px; /* Add margin only to links that follow another link */
+}
+
+nav a:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -15px; /* Adjust this to position the line between links */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1em;
+    background-color: var(--nav-divider-color);
+}
+
+.intro {
+    text-align: left; /* Align content to the left */
+    margin: -20px auto;
+    max-width: 800px; /* Adjusted width */
+}
+
+p a {
+    text-decoration: none;
+    color: var(--link-color);
+    padding-bottom:2px;
+    border-bottom: 1px dashed #7e7979;
+}
+
+
+
+main {
+    padding: 20px 0;
+}
+
+.writings, .projects, .artworks {
+    max-width: 800px; /* Set the same max-width as content */
+    margin: 40px auto; /* Center the section */
+    padding: 0 20px; /* Adding padding to match other sections */
+}
+
+h2 {
+    color: var(--subheading-color);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: var(--link-color);
+    padding-bottom:2px;
+    border-bottom: 1px dashed #7e797995;
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: transparent; /* Transparent background */
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.dark-mode-toggle i {
+    pointer-events: none; /* Prevents icon from being clickable separately */
+}
+
+/* Icon colors for dark mode */
+body.dark-mode .dark-mode-toggle i.fa-moon {
+    color: #ffffff; /* Moon icon is white in dark mode */
+}
+
+body.dark-mode .dark-mode-toggle i.fa-sun {
+    color: #ffffff; /* Sun icon is black in dark mode */
+}
+
+/* Icon colors for light mode */
+.dark-mode-toggle i.fa-moon {
+    color: #000000; /* Moon icon is white by default */
+}
+
+.dark-mode-toggle i.fa-sun {
+    color: #000000; /* Sun icon is black by default */
+}
+
+.artwork-collage {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Increase columns for more flexibility */
+    gap: 7px; /* Reduce gap between images */
+    max-width: 100%; /* Ensure it fits within the section */
+    margin: 0 auto; /* Center the collage */
+}
+
+.artwork-collage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the images cover the grid area, may crop a little */
+    border-radius: 7px; /* Smaller border radius */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.artwork-collage img:hover {
+    transform: scale(1.07); /* Slightly enlarge the image on hover */
+}
+
+/* Grid positioning based on updated aspect ratios */
+.artwork-collage img:nth-child(1) { /* art1 - 9:16 */
+    grid-column: span 2; /* Tall and narrow */
+    grid-row: span 3; /* Reduce row span */
+}
+
+.artwork-collage img:nth-child(2) { /* art2 - 9:16 */
+    grid-column: span 2; /* Tall and narrow */
+    grid-row: span 3; /* Reduce row span */
+}
+
+.artwork-collage img:nth-child(3) { /* art3 - 16:9 */
+    grid-column: span 3; /* Smaller, wide */
+    grid-row: span 2;
+}
+
+.artwork-collage img:nth-child(4) { /* art4 - 16:9 */
+    grid-column: span 3; /* Smaller wide */
+    grid-row: span 2;
+}
+
+.artwork-collage img:nth-child(5) { /* art5 - 16:9 */
+    grid-column: span 3; /* Smaller wide */
+    grid-row: span 2;
+}
+
+.artwork-collage img:nth-child(6) { /* art6 - 16:9 */
+    grid-column: span 3; /* Smaller wide */
+    grid-row: span 2;
+}
+
+.artwork-collage img:nth-child(7) { /* art7 - 16:9 */
+    grid-column: span 4; /* Smaller wide */
+    grid-row: span 2;
+}
+
+/* Full-screen overlay styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dimmed background */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth fade-in/out */
+}
+
+.overlay.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+    transform: scale(0.8);
+    transition: transform 0.3s ease; /* Smooth scaling */
+}
+
+.overlay.show img {
+    transform: scale(1);
+}
