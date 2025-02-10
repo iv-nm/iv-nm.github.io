@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html> <!-- Inline dark mode styles -->
+<html lang="en">
 <head>
+    <!-- Immediately apply dark mode if preference is stored -->
+    <script>
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
 
     <style>
-
         /* Styles for normal content */
         main {
             padding: 20px;
@@ -16,25 +21,23 @@
         }
     </style>
 
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Filter by Tags</title>
     <link rel="stylesheet" href="blogs-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <main id="main-content">
-    <header id="page-header">
-        <!-- Default header content -->
-        <h1>Ivan Makarochkin</h1>
-        <nav>
-            <a href="main.html">Home</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="#">About</a>
-        </nav>
-    </header>
+        <header id="page-header">
+            <!-- Default header content -->
+            <h1>Ivan Makarochkin</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="blogs.html">Blog</a>
+                <a href="#">About</a>
+            </nav>
+        </header>
 
         <aside>
             <nav class="filter-nav">
@@ -45,29 +48,19 @@
         </aside>
         <section>
             <ul id="blog-list">
-                <li data-tag="Jarvis"><a href="jarvis_blog/initial_setup.html">2023-12-10 - Initial setup</a></li> 
-                
-                <li data-tag="Jarvis"><a href="jarvis_blog/new_stt.html">2023-12-10 - New speech-to-text</a></li> 
-
-                <li data-tag="Jarvis"><a href="jarvis_blog/new_tts.html">2023-12-10 - New text-to-speech</a></li> 
-
-                <li data-tag="Jarvis"><a href="jarvis_blog/blog0.html">2023-12-15 - Wake Word Detection</a></li> 
-
-                <li data-tag="Jarvis"><a href="jarvis_blog/blog1.html">2024-01-15 - Improved voice recognition</a></li>
-
-                <li data-tag="Jarvis"><a href="jarvis_blog/core_rebuild.html">2023-12-10 - Core rebuild</a></li> 
-
-
-                <li data-tag="Jarvis"><a href="jarvis_blog/blog2.html">2024-02-19 - New command processing</a></li>
-
+                <li data-tag="Jarvis"><a href="jarvis_blog/initial-setup.html">2023-12-10 - Initial setup</a></li> 
+                <li data-tag="Jarvis"><a href="jarvis_blog/new-stt.html">2023-12-10 - New speech-to-text</a></li> 
+                <li data-tag="Jarvis"><a href="jarvis_blog/new-tts.html">2023-12-15 - New text-to-speech</a></li> 
+                <li data-tag="Jarvis"><a href="jarvis_blog/wake-word-detection.html">2024-01-06 - Wake Word Detection</a></li> 
+                <li data-tag="Jarvis"><a href="jarvis_blog/improved-voice-recognition.html">2024-01-15 - Improved voice recognition</a></li>
+                <li data-tag="Jarvis"><a href="jarvis_blog/core-rebuild.html">2024-01-30 - Core rebuild</a></li> 
+                <li data-tag="Jarvis"><a href="jarvis_blog/new-command-processing.html">2024-02-19 - New command processing</a></li>
                 <li data-tag="Jarvis"><a href="jarvis_blog/new-command-list.html">2024-04-01 - New command list</a></li>
-
                 <li data-tag="Jarvis"><a href="jarvis_blog/implementing-modes.html">2024-09-01 - Implementing modes</a></li>
-
-                <li data-tag="Telegram"><a href="entry3.html">2024-06-29 - Making summary of voice messages</a></li>
             </ul>
         </section>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const filters = document.querySelectorAll('.filter-nav a.filter');
@@ -78,7 +71,7 @@
             // Check if the page is opened in an iframe
             if (window.self !== window.top) {
                 selectedTag = new URLSearchParams(window.location.search).get('tag') || 'Jarvis';
-                
+
                 // Modify the header for iframe context
                 const header = document.getElementById('page-header');
                 header.innerHTML = `
@@ -87,12 +80,12 @@
                 // Apply additional styles
                 header.style.backgroundColor = 'transparent';
                 header.style.position = 'absolute';
-                header.style.top = '60px'; // Positioned 60px from the very top of the screen
+                header.style.top = '60px';
                 header.style.left = '0';
                 header.style.width = '100%';
                 header.style.padding = '10px';
-                header.style.borderBottom = 'none'; // Remove border
-                
+                header.style.borderBottom = 'none';
+
                 // Apply class to adjust content in iframe
                 mainContent.classList.add('iframe-content');
             }
@@ -138,9 +131,5 @@
             }
         });
     </script>
-
-    <!-- Include the shared dark mode script -->
-    <script src="dark-mode.js"></script>
-
 </body>
 </html>

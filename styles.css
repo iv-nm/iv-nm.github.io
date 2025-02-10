@@ -24,7 +24,8 @@
 }
 
 /* Dark mode variables */
-body.dark-mode {
+/* Dark mode variables applied to html */
+html.dark-mode {
     --font-color: #ccc;
     --background-color: #121212;
     --header-color: #e0e0e0;
@@ -46,7 +47,7 @@ body.dark-mode {
     --hover-color: #cacaca;
 }
 
-/* Body styles with content positioning */
+/* Apply CSS variables */
 body {
     font-family: 'JetBrains Mono', monospace;
     color: var(--font-color);
@@ -55,9 +56,11 @@ body {
     padding: 0 20px;
 }
 
-html.dark-mode {
-    --background-color: #121212;
+/* Enable transitions only after initial load */
+html.transition-enabled body {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 
 /* Header with positioning preserved */
 header {
@@ -167,23 +170,24 @@ ul li a {
     transition: color 0.3s ease;
 }
 
-/* Icon colors for dark mode */
-body.dark-mode .dark-mode-toggle i.fa-moon {
-    color: #ffffff; /* Moon icon is white in dark mode */
-}
-
-body.dark-mode .dark-mode-toggle i.fa-sun {
-    color: #ffffff; /* Sun icon is black in dark mode */
-}
-
-/* Icon colors for light mode */
+/* Default Icon Colors */
 .dark-mode-toggle i.fa-moon {
-    color: #000000; /* Moon icon is white by default */
+    color: #000000; /* Moon icon is black in light mode */
 }
 
 .dark-mode-toggle i.fa-sun {
-    color: #000000; /* Sun icon is black by default */
+    color: #000000; /* Sun icon is black in light mode */
 }
+
+/* Icon colors for dark mode */
+html.dark-mode .dark-mode-toggle i.fa-moon {
+    color: #ffffff; /* Moon icon is white in dark mode */
+}
+
+html.dark-mode .dark-mode-toggle i.fa-sun {
+    color: #ffffff; /* Sun icon is white in dark mode */
+}
+
 
 
 /* Artwork collage */

@@ -11,38 +11,35 @@
     --iframe-back-link-color: #333;
 }
 
-body.dark-mode {
-    --font-color: #ccc; /* Lighter text color for dark background */
-    --background-color: #121212; /* Dark background color */
-    --header-color: #e0e0e0; /* Light header text color */
-    --nav-link-color: #e0e0e0; /* Light navigation link color */
-    --nav-divider-color: #444; /* Darker divider color */
-    --filter-color: #888; /* Slightly lighter filter button color */
-    --filter-hover-color: #bbb; /* Even lighter filter button color on hover */
-    --filter-selected-color: #f0f0f0; /* Light color for selected filter */
-    --iframe-header-title-color: #e0e0e0; /* Light color for iframe header title */
-    --iframe-back-link-color: #e0e0e0; /* Light color for back link in iframe */
+/* Dark mode variables */
+html.dark-mode {
+    --font-color: #ccc;
+    --background-color: #121212;
+    --header-color: #e0e0e0;
+    --nav-link-color: #e0e0e0;
+    --nav-divider-color: #444;
+    --filter-color: #888;
+    --filter-hover-color: #bbb;
+    --filter-selected-color: #f0f0f0;
+    --iframe-header-title-color: #e0e0e0;
+    --iframe-back-link-color: #e0e0e0;
 }
 
-
-
 body {
-    font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
+    font-family: 'JetBrains Mono', monospace;
     color: var(--font-color);
     background-color: var(--background-color);
- 
-    padding: 100px 50px; /* Adding side padding */
+    padding: 100px 50px;
 }
 
 header {
-    max-width: 800px; /* Set the same max-width as content */
-    margin: 0 auto; /* Center the header */
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px 0;
-    text-align: left; /* Align content to the left */
+    text-align: left;
 }
 
 header h1 {
-    margin: 0;
     font-size: 2em;
     color: var(--header-color);
 }
@@ -80,11 +77,8 @@ nav a:not(.filter):not(:last-child)::after { /* Only apply the lines to non-filt
 }
 
 .filter-nav a.filter {
-    text-decoration: none;
-    position: relative;
     color: var(--filter-color);
     margin: 0 15px;
-    font-weight: normal;
     cursor: pointer;
     margin-bottom: 10px;
 }
@@ -93,13 +87,14 @@ nav a:not(.filter):not(:last-child)::after { /* Only apply the lines to non-filt
     margin-left: 0; /* Remove left margin for the first filter */
 }
 
+
+
 .filter-nav a.filter:hover {
-    text-decoration: none; /* Remove underline on hover */
-    color: var(--filter-hover-color); /* Slightly lighter color on hover */
+    color: var(--filter-hover-color);
 }
 
 .filter-nav a.filter.selected {
-    color: var(--filter-selected-color); /* Lighter color for the selected filter */
+    color: var(--filter-selected-color);
 }
 
 #blog-list {
