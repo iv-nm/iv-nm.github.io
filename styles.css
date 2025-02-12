@@ -1,15 +1,22 @@
-/* Root variables */
+/* =============================================================================
+   Unified CSS File (Blog + Main + Artworks Styles)
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   1. CSS Variables & Dark Mode Variables
+--------------------------------------------------------------------------- */
 :root {
+    /* Global variables (merged) */
     --font-color: #333;
     --background-color: #fff;
     --header-color: #4b4b4b;
     --nav-link-color: #1a1a1a;
     --nav-divider-color: #1a1a1a;
     --subheading-color: #4b4b4b;
-    --link-color: #252525;
+    --link-color: #838383;
     --link-color-hovered: #171717;
     --box-shadow-color: rgba(0, 0, 0, 0.1);
-    --margin-align: 100px;
+    --margin-align: 30px;
     --body-bg-color: rgb(240, 240, 240);
     --filter-color: #a8a8a8;
     --filter-hover-color: #6a6a6a;
@@ -17,14 +24,16 @@
     --iframe-header-title-color: #2a2a2a;
     --iframe-back-link-color: #333;
     --primary-color: #333;
-    --secondary-color: #777;
+    /* For blog pages we use a slightly darker secondary color */
+    --secondary-color: #313131;
     --accent-color: #555;
     --hover-color: #171717;
     --iframe-shadow-color: rgba(0, 0, 0, 0);
+    /* Blog-specific code snippet colors */
+    --code-background: #f5f5f5;
+    --code-text-color: #202020;
 }
 
-/* Dark mode variables */
-/* Dark mode variables applied to html */
 html.dark-mode {
     --font-color: #ccc;
     --background-color: #121212;
@@ -42,86 +51,87 @@ html.dark-mode {
     --iframe-header-title-color: #e0e0e0;
     --iframe-back-link-color: #e0e0e0;
     --primary-color: #ccc;
-    --secondary-color: #aaa;
+    --secondary-color: #d8d8d8;
     --accent-color: #bbb;
     --hover-color: #cacaca;
+    --code-background: #1e1e1e;
+    --code-text-color: #d1d1d1;
 }
 
-/* Apply CSS variables */
+/* ---------------------------------------------------------------------------
+   2. Base Styles
+--------------------------------------------------------------------------- */
 body {
     font-family: 'JetBrains Mono', monospace;
     color: var(--font-color);
     background-color: var(--background-color);
-    margin: 100px;
-    padding: 0 20px;
+    margin: 0;
+    padding: 20px;
+    /* Uncomment the following for a full‑viewport flex layout if desired:
+       display: flex;
+       flex-direction: column;
+       min-height: 100vh;
+    */
 }
-
-/* Enable transitions only after initial load */
 html.transition-enabled body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
-/* Header with positioning preserved */
+/* ---------------------------------------------------------------------------
+   3. General Page Styles (Headers, Navigation, Layout)
+--------------------------------------------------------------------------- */
+/* Header */
 header {
     max-width: 850px;
-    margin: 0px auto;
+    margin: 0 auto;
     padding: 0 20px;
-
 }
-
 header h1 {
-
     font-size: 2em;
     color: var(--header-color);
 }
 
-
-.writings, .projects, .artworks {
-    max-width: 800px; /* Set the same max-width as content */
-    margin: 40px auto; /* Center the section */
-    padding: 0 20px; /* Adding padding to match other sections */
+/* Sections (writings, projects, artworks, etc.) */
+.writings,
+.projects,
+.artworks {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
-
-
-
 .intro {
-    text-align: left; /* Align content to the left */
-    margin: 20px 20px;
-    max-width: 800px; /* Adjusted width */
+    text-align: left;
+    margin: 20px;
+    max-width: 800px;
 }
 
-
+/* Paragraph links */
 p a {
     text-decoration: none;
     color: var(--link-color);
-    padding-bottom:2px;
+    padding-bottom: 2px;
     border-bottom: 1px dashed #7e7979;
 }
 
-/* Navigation positioning */
+/* Navigation */
 nav {
     max-width: 800px;
     display: flex;
     align-items: center;
-    margin-top: 10px; /* Add margin-top to create space between title and nav */
+    margin-top: 10px;
 }
-
 nav a {
     text-decoration: none;
     color: var(--nav-link-color);
     position: relative;
-
 }
-
 nav a + a {
-    margin-left: 30px; /* Add margin only to links that follow another link */
+    margin-left: 30px;
 }
-
 nav a:not(:last-child)::after {
     content: "";
     position: absolute;
-    right: -15px; /* Adjust this to position the line between links */
+    right: -15px;
     top: 50%;
     transform: translateY(-50%);
     width: 1px;
@@ -129,28 +139,25 @@ nav a:not(:last-child)::after {
     background-color: var(--nav-divider-color);
 }
 
-/* Content layout */
-main, .writings, .projects, .artworks {
+/* Main content container */
+main,
+.writings,
+.projects,
+.artworks {
     max-width: 850px;
     margin: 40px auto;
     padding: 0 20px;
 }
-
-/* Typography */
 h2 {
     color: var(--subheading-color);
-
 }
-
 ul {
     list-style-type: none;
     padding: 0;
 }
-
 ul li {
     margin: 10px 0;
 }
-
 ul li a {
     text-decoration: none;
     color: var(--link-color);
@@ -158,39 +165,111 @@ ul li a {
     border-bottom: 1px dashed #7e797995;
 }
 
-
+/* Dark mode toggle button */
 .dark-mode-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: transparent; /* Transparent background */
+    background-color: transparent;
     border: none;
     cursor: pointer;
     font-size: 1em;
     transition: color 0.3s ease;
 }
-
-/* Default Icon Colors */
-.dark-mode-toggle i.fa-moon {
-    color: #000000; /* Moon icon is black in light mode */
-}
-
+.dark-mode-toggle i.fa-moon,
 .dark-mode-toggle i.fa-sun {
-    color: #000000; /* Sun icon is black in light mode */
+    color: #000;
 }
-
-/* Icon colors for dark mode */
-html.dark-mode .dark-mode-toggle i.fa-moon {
-    color: #ffffff; /* Moon icon is white in dark mode */
-}
-
+html.dark-mode .dark-mode-toggle i.fa-moon,
 html.dark-mode .dark-mode-toggle i.fa-sun {
-    color: #ffffff; /* Sun icon is white in dark mode */
+    color: #fff;
 }
 
+/* ---------------------------------------------------------------------------
+   4. Blog-Specific Styles
+   (Scoped to elements within .blog-container so they won’t affect other pages)
+--------------------------------------------------------------------------- */
+.blog-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px var(--box-shadow-color);
+    margin-top: 50px;
+    position: relative;
+}
+.blog-title {
+    font-size: 2em;
+    color: var(--primary-color);
+}
+.blog-subtitle {
+    font-size: 1.1em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+.blog-content {
+    font-size: 16px;
+    color: var(--accent-color);
+    line-height: 1.6;
+}
+/* Blog Code Snippets */
+.blog-container .code-container {
+    background-color: var(--code-background);
+    color: var(--code-text-color);
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+}
+/* Blog Home Link */
+.home-link {
+    text-decoration: none;
+    color: var(--link-color);
+    font-size: 1em;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    transition: color 0.3s ease;
+}
+.home-link-icon {
+    margin-right: 5px;
+}
+.home-link:hover {
+    color: var(--hover-color);
+}
 
+/* Blog Images */
+.blog-container img {
+    width: 300px;
+    border-radius: 10px;
+    float: right;
+}
+/* Blog Links */
+.blog-container a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+.blog-container .text_link a {
+    border-bottom: 1px dashed var(--link-color);
+}
+.blog-container .text_link a:hover {
+    color: var(--hover-color);
+}
+/* Blog iframe mode adjustments */
+.iframe-mode .home-link {
+    top: 40px;
+}
+.iframe-mode .blog-container {
+    margin-top: 20px;
+}
 
-/* Artwork collage */
+/* ---------------------------------------------------------------------------
+   5. Artwork Collage (Artworks Pics) Styles
+--------------------------------------------------------------------------- */
 .artwork-collage {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -198,7 +277,6 @@ html.dark-mode .dark-mode-toggle i.fa-sun {
     max-width: 100%;
     margin: 0 auto;
 }
-
 .artwork-collage img {
     width: 100%;
     height: 100%;
@@ -206,24 +284,130 @@ html.dark-mode .dark-mode-toggle i.fa-sun {
     border-radius: 7px;
     transition: transform 0.3s ease;
 }
-
 .artwork-collage img:hover {
     transform: scale(1.07);
 }
-
-.artwork-collage img:nth-child(1), img:nth-child(2) {
+/* Specific grid spans (adjust these as needed) */
+.artwork-collage img:nth-child(1),
+.artwork-collage img:nth-child(2) {
     grid-column: span 2;
     grid-row: span 3;
 }
-
-.artwork-collage img:nth-child(3), img:nth-child(4), img:nth-child(5), img:nth-child(6) {
+.artwork-collage img:nth-child(3),
+.artwork-collage img:nth-child(4),
+.artwork-collage img:nth-child(5),
+.artwork-collage img:nth-child(6) {
     grid-column: span 3;
     grid-row: span 2;
 }
-
 .artwork-collage img:nth-child(7) {
     grid-column: span 4;
     grid-row: span 2;
+}
+
+/* ---------------------------------------------------------------------------
+   6. Project Page / Iframe & Article Section Styles
+--------------------------------------------------------------------------- */
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 70%;           /* Adjust overall container width */
+    max-width: 800px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.article-section {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 6px var(--box-shadow-color);
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 800px;
+}
+.iframe-section {
+    flex: 1;
+    overflow: hidden;
+    padding: 20px;
+}
+.iframe-section iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+    border-radius: 10px;
+}
+.iframe-header-title {
+    font-size: 2rem;
+    color: var(--iframe-header-title-color);
+    margin: -10px 70px;
+    margin-bottom: 20px;
+}
+.iframe-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.iframe-back-link {
+    text-decoration: none;
+    color: var(--iframe-back-link-color);
+    margin-right: 11px;
+    font-size: 1rem;
+}
+/* Project Home Link */
+.project-home-link {
+    display: block;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1em;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.project-home-link:hover {
+    color: var(--link-color-hovered);
+}
+
+/* ---------------------------------------------------------------------------
+   7. Code Snippets Styling (Project Pages)
+--------------------------------------------------------------------------- */
+.code-container {
+    background-color: #202020;
+    color: hsl(212, 100%, 87%);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    max-width: 630px;
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+}
+pre,
+code {
+    margin: 0;
+    white-space: pre;
+    padding: 0;
+    text-align: left;
+}
+/* Syntax highlighting tokens */
+.token.keyword { color: #ff5dd4; }
+.token.string  { color: #ffa37e; }
+.token.function { color: #ffff79; }
+.token.comment { color: #6A9955; }
+.token.builtin { color: #fffca5; }
+.token.punctuation { color: #e4e4e4; }
+.token.variable,
+.token.parameter { color: #9CDCFE; }
+
+/* For audio elements (if any) */
+audio {
+    margin-left: var(--margin-align);
 }
 
 /* Full-screen overlay */
@@ -234,7 +418,7 @@ html.dark-mode .dark-mode-toggle i.fa-sun {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
-    display: none;
+    display: none; /* hidden by default */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -243,6 +427,7 @@ html.dark-mode .dark-mode-toggle i.fa-sun {
 }
 
 .overlay.show {
+    display: flex; /* ensure it’s visible */
     opacity: 1;
     transform: scale(1);
 }
@@ -259,110 +444,47 @@ html.dark-mode .dark-mode-toggle i.fa-sun {
     transform: scale(1);
 }
 
-/* Blog content */
-.blog-container {
-    width: 100%;
-    max-width: 800px;
-    background-color: var(--background-color);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px var(--box-shadow-color);
-    margin-top: 50px;
-}
 
-.blog-title {
-    font-size: 2em;
-    color: var(--primary-color);
-}
 
-.blog-subtitle {
-    font-size: 1.1em;
-    color: var(--secondary-color);
-    margin-bottom: 20px;
-}
-
-.blog-content {
-    font-size: 16px;
-    color: var(--accent-color);
-    line-height: 1.6;
-}
-
-.iframe-mode .blog-container {
-    margin-top: 0px;
-    box-shadow: var(--iframe-shadow-color);
-    width: 90%;
-}
-
-/* Iframe section */
-.iframe-section {
-    flex: 1;
-    overflow: hidden;
-    padding: 20px;
-}
-
-.iframe-section iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 10px;
-}
-
-.iframe-header-title {
-    font-size: 2rem;
-    color: var(--iframe-header-title-color);
-    margin: -10px 70px;
-    margin-bottom: 20px;
-}
-
-.iframe-nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.iframe-back-link {
-    text-decoration: none;
-    color: var(--iframe-back-link-color);
-    margin-right: 11px;
-    font-size: 1rem;
-}
-
-/* Code styling */
-.code-container {
-    background-color: #202020;
-    color: hsl(212, 100%, 87%);
-    padding: 10px;
-    border-radius: 5px;
-    overflow-x: auto;
-    margin-left: var(--margin-align);
-    max-width: 630px;
-    width: 100%;
-    display: block;
-}
-
-pre, code {
-    margin: 0;
-    white-space: pre;
-    padding: 0;
-    text-align: left;
-}
-
-.token.keyword {
-    color: #ff5dd4;
-}
-
-.token.string {
-    color: #ffa37e;
-}
-
-.token.function {
-    color: #ffff79;
-}
-
-.token.comment {
-    color: #6A9955;
-}
-
-.token.punctuation {
-    color: #e4e4e4;
-}
+/* ---------------------------------------------------------------------------
+   8. Responsive Styles (for screens up to 600px wide)
+--------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+    .article-section {
+        padding: 20px;
+        margin: 10px;
+        max-width: 100%;
+    }
+    h1,h2 {
+        text-align: left;
+        font-size: 1.3em;
+    }
+    p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    /* Adjust code containers on mobile */
+    .code-container {
+        padding: 10px;
+        font-size: 0.7rem;
+        max-width: 95%;
+    }
+    .code-container pre {
+        white-space: pre-wrap;
+    }
+    /* Home link remains left-aligned */
+    .home-link-icon {
+        text-align: left;
+ 
+    }
+    ul li a {
+        font-size: 0.9rem;
+    }
+    .artwork-collage {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 7px;
+        max-width: 100%;
+        margin: 0 auto;
+    }

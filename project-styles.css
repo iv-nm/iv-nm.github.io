@@ -7,8 +7,9 @@
     --subheading-color: #4b4b4b;
     --link-color: #838383;
     --link-color-hovered: #171717;
-    --body-bg-color: rgb(240, 240, 240); /* Added variable for body background color */
-    --box-shadow-color: rgba(0, 0, 0, 0.1); /* Added variable for box shadow color */
+    --body-bg-color: rgb(240, 240, 240);
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    /* This variable is less needed if we use container padding */
     --margin-align: 30px;
 }
 
@@ -29,17 +30,22 @@ body {
     display: flex;
     margin: 0;
     height: 100vh;
-    font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
-    background-color: var(--body-bg-color); /* Use the variable for body background color */
-    color: var(--font-color); /* Use the variable for font color */
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--body-bg-color);
+    color: var(--font-color);
 }
 
 .container {
     display: flex;
     flex-direction: row;
     height: 100%;
-    width: 100%;
+    width: 70%; /* Reduce the width */
+    max-width: 800px; /* Ensure it does not get too wide */
+    justify-content: center;
+    align-items: center;
+    margin: auto; /* Ensures it's centered */
 }
+
 
 .article-section {
     flex: 1;
@@ -47,24 +53,36 @@ body {
     overflow-y: auto;
     background-color: var(--background-color);
     box-shadow: 0 4px 6px var(--box-shadow-color);
-    margin: 20px;
+    margin: 20px auto;  /* centers horizontally */
     border-radius: 10px;
+    max-width: 800px;   /* adjust for desired max width */
+}
+
+
+
+h1, h2, p, audio, .code-container {
+    margin: 0 0 20px 0;  /* bottom margin for spacing */
 }
 
 h1 {
-    margin-left:var(--margin-align);    
-    font-family: 'JetBrains Mono', monospace; /* Set JetBrains Mono font */
+    font-family: 'JetBrains Mono', monospace;
     font-size: 2em;
-    color: var(--header-color); /* Use the variable for header color */
+    color: var(--header-color);
+    text-align: left;  /* adjust to center if preferred on mobile */
 }
-p {
-    margin-left:var(--margin-align);
-    max-width: 650px;
-}
+
 h2 {
-    margin-left:var(--margin-align);
-    color: var(--header-color); /* Use the variable for header color */
+    color: var(--header-color);
+    text-align: left;
 }
+
+p {
+    /* Allow paragraphs to use the container's width */
+    max-width: 100%;
+    text-align: justify;
+}
+
+
 .home-link {
     display: block;
     margin-bottom: 20px; /* Space between home link and content */
@@ -105,13 +123,12 @@ h2 {
     font-family: 'JetBrains Mono', monospace;
     padding: 10px;
     border-radius: 5px;
-    overflow-x: auto; /* Enable horizontal scrolling when content overflows */
+    overflow-x: auto;
     overflow-y: hidden;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    max-width: 630px; /* Limit container width to 650px */
-    width: 100%; /* Allow the container to shrink on smaller screens */
-    margin-left: var(--margin-align);
-    display: block; /* Ensure block-level behavior for width properties */
+    max-width: 630px;
+    width: 100%;
+    display: block;
 }
 
 pre {
@@ -167,3 +184,46 @@ audio{
 }
 
 
+@media (max-width: 600px) {
+    /* Adjust container padding and margins on small screens */
+    .article-section {
+        padding: 40px;
+        margin: 10px;
+        max-width: 100%;
+    }
+
+    /* Center headings for a more mobile-friendly layout */
+    h1, h2 {
+        text-align: left;
+        font-size: 1.8em; /* slightly smaller headings */
+    }
+
+    /* Adjust paragraph font size and line height for readability */
+    p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Ensure code containers don’t overflow the viewport */
+    .code-container {
+        padding: 8px;
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+
+    /* Optional: Adjust the home-link styling if needed */
+    .home-link {
+        text-align: left;
+    }
+
+    .code-container {
+        padding: 10px;       /* Reduce padding */
+        font-size: 0.7rem;  /* Smaller font size for mobile */
+        max-width: 100%;    /* Use the full width available on mobile */
+    }
+
+    /* Optional: Allow code lines to wrap on small screens */
+    .code-container pre {
+        white-space: pre-wrap;
+    }
+}

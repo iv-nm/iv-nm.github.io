@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jarvis Page</title>
-    <link rel="stylesheet" href="project-styles.css"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
 
     <script>
@@ -19,6 +19,7 @@
 </head>
 <body>
     <div class="article-section">
+        
         <a href="index.html" class="home-link">
             <span class="home-link-icon">&lt; home</span>
         </a>
@@ -60,7 +61,6 @@ def listen(self):
         
         <div class="code-container">
             <pre><code class="language-python">
-                
 self.vosk_service.start_listening() #starts listening, returns recognized string 
 self.vosk_service.start_listening() #stops listening until activated
             </code></pre>
@@ -134,15 +134,28 @@ from jellyfish import jaro_winkler_similarity
     <!-- Prism Language Support for Python -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
 
+    <h1>Blogs</h1>
 
+    <section>
+        <ul id="blog-list">
+            <li data-tag="Jarvis"><a href="jarvis_blog/initial-setup.html">2023-12-10 - Initial setup</a></li> 
+            <li data-tag="Jarvis"><a href="jarvis_blog/new-stt.html">2023-12-10 - New speech-to-text</a></li> 
+            <li data-tag="Jarvis"><a href="jarvis_blog/new-tts.html">2023-12-15 - New text-to-speech</a></li> 
+            <li data-tag="Jarvis"><a href="jarvis_blog/wake-word-detection.html">2024-01-06 - Wake Word Detection</a></li> 
+            <li data-tag="Jarvis"><a href="jarvis_blog/improved-voice-recognition.html">2024-01-15 - Improved voice recognition</a></li>
+            <li data-tag="Jarvis"><a href="jarvis_blog/core-rebuild.html">2024-01-30 - Core rebuild</a></li> 
+            <li data-tag="Jarvis"><a href="jarvis_blog/new-command-processing.html">2024-02-19 - New command processing</a></li>
+            <li data-tag="Jarvis"><a href="jarvis_blog/new-command-list.html">2024-04-01 - New command list</a></li>
+            <li data-tag="Jarvis"><a href="jarvis_blog/implementing-modes.html">2024-09-01 - Implementing modes</a></li>
+        </ul>
+    </section>
+    
     
 
     </div>
-    <div class="iframe-section">
-        <iframe src="blogs.html?tag=Jarvis"></iframe>
-    </div>
 
-    
+
+
 
     <!-- Include the shared dark mode script -->
     <script src="dark-mode.js"></script>
