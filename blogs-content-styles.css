@@ -1,51 +1,48 @@
 :root {
-    --primary-color: #333; /* Primary text color */
-    --secondary-color: #313131; /* Subtitle text color */
-    --accent-color: #555; /* Blog content text color */
-    --background-color: white; /* Background color */
-    --box-shadow-color: rgba(0, 0, 0, 0.0); /* Box shadow color */
-    --hover-color: #171717; /* Hover color for the back button */
-    --link-color: #838383;
-    --iframe-shadow-color: rgba(0, 0, 0, 0)
+    --primary-color: #333;
+    --secondary-color: #313131;
+    --accent-color: #555;
+    --background-color: white;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-color: #171717;
+    --link-color: #d5d5d5;
+    --code-background: #f5f5f5;
+    --code-text-color: #202020;
 }
 
-body.dark-mode {
+html.dark-mode {
     --primary-color: #ccc;
     --secondary-color: #d8d8d8;
     --accent-color: #bbb;
     --background-color: #121212;
-    --box-shadow-color: rgba(0, 0, 0, 0.0); /* Lightened box shadow color */
-    --hover-color: #cacaca; /* Hover color for dark mode */
+    --box-shadow-color: rgba(0, 0, 0, 0.0);
+    --hover-color: #cacaca;
+    --link-color: #a8a8a8;
+    --code-background: #1e1e1e;
+    --code-text-color: #d1d1d1;
 }
-
-
 
 body {
     font-family: 'JetBrains Mono', monospace;
-    background-color: var(--background-color); /* Set the background color to the variable */
+    background-color: var(--background-color);
+    color: var(--primary-color);
     margin: 0;
-    padding: 0; /* Removed padding to make full use of the space */
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
     flex-direction: column;
-    position: relative; /* Added to position the home link absolutely */
+    height: 100%;
 }
-
-
-
 
 .home-link {
     text-decoration: none;
-    color: var(--link-color); /* Use primary color variable */
-
+    color: var(--link-color);
     font-size: 1em;
     position: absolute;
-    top: 40px; /* Default position when not in iframe */
-    left: 40px; /* Positioned at the left */
-    transition: color 0.3s ease; /* Smooth transition for color change */
-
+    top: 40px;
+    left: 40px;
+    transition: color 0.3s ease;
 }
 
  .home-link-icon {
@@ -53,37 +50,53 @@ body {
 }
 
 .home-link:hover {
-    color: var(--hover-color); /* Change color on hover */
+    color: var(--hover-color);
 }
 
 .blog-container {
     width: 100%;
     max-width: 800px;
-    background-color: var(--background-color); /* Keep the blog container background white */
+    background-color: var(--background-color);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 10px var(--box-shadow-color); /* Use box shadow color variable */
-    margin-top: 50px; /* Default margin from the top */
+    box-shadow: 0 0 10px var(--box-shadow-color);
+    margin-top: 50px;
 }
 
 .blog-title {
     font-size: 2em;
-    color: var(--primary-color); /* Use primary color variable */
-    
-    text-align: left;
+    color: var(--primary-color);
 }
+
 
 .blog-subtitle {
     font-size: 1.1em;
-    color: var(--secondary-color); /* Use secondary color variable */
+    color: var(--secondary-color);
     margin-bottom: 20px;
-    text-align: left;
 }
 
 .blog-content {
     font-size: 16px;
-    color: var(--accent-color); /* Use accent color variable */
+    color: var(--accent-color);
     line-height: 1.6;
+}
+
+.code-container {
+    background-color: var(--code-background);
+    color: var(--code-text-color);
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+}
+
+pre, code {
+    margin: 0;
+    white-space: pre;
+    text-align: left;
 }
 
 /* Styles specific to iframe mode */
@@ -92,12 +105,7 @@ body {
 }
 
 .iframe-mode .blog-container {
-    margin-top: 50px; /* Move the content higher when in iframe */
-    box-shadow: var(--iframe-shadow-color);
-
-    width:100%;
-    max-width: 700px;
-
+    margin-top: 20px;
 }
 
 img {
@@ -112,42 +120,20 @@ a {
 
 }
 
-.text_link 
-{
-    border-bottom: 1px dashed #7e797995;
+.text_link a {
+    border-bottom: 1px dashed var(--link-color);
+}
+
+.text_link a:hover {
+    color: var(--hover-color);
 }
 
 
 
 
-.code-container {
-    background-color: #202020;
-    color: hsl(212, 100%, 87%);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    overflow-x: auto; /* Enable horizontal scrolling when content overflows */
-    overflow-y: hidden;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    max-width: 800px; /* Limit container width to 650px */
-    width: 100%; /* Allow the container to shrink on smaller screens */
-    margin-left: var(--margin-align);
-    display: block; /* Ensure block-level behavior for width properties */
-
-}
-
-pre {
+pre, code {
     margin: 0;
-    white-space: pre; /* Preserve whitespaces and prevent wrapping */
-    padding: 0;
-    text-align: left;
-    overflow: visible; /* Let the container handle overflow */
-}
-
-code {
-    display: block;
-    padding: 0;
+    white-space: pre;
     text-align: left;
 }
 

@@ -6,22 +6,22 @@
 
 
 
-<script>
-    // Apply dark mode immediately based on local storage
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.documentElement.classList.add('dark-mode');
-    }
+    <script>
+        // Apply dark mode immediately based on local storage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark-mode');
+        }
 
-    // Check if the page is loaded in an iframe
-    if (window.self !== window.top) {
-        document.documentElement.classList.add('iframe-mode');
-    }
-</script>
+        // Check if the page is loaded in an iframe
+        if (window.self !== window.top) {
+            document.documentElement.classList.add('iframe-mode');
+        }
+    </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ivan's Page</title>
-    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
 </head>
 <body>
@@ -31,7 +31,7 @@
     <main>
         <div class="blog-container">
             <h1 class="blog-title">Implementing modes</h1>
-            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <h2 class="blog-subtitle">Date: 2024-09-01</h2>
             <div class="blog-content">
 
                 <p>As for modes, I decided to make methods that will open app:</p>
