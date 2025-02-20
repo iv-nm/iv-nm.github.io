@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>
+    // Apply dark mode immediately based on local storage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+    }
+
+    // Check if the page is loaded in an iframe
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+    }
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivan's Page</title>
+    <link rel="stylesheet" href="../blogs-content-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
+</head>
+<body>
+    <a href="javascript:history.back()" class="home-link">
+        <span class="home-link-icon">&lt; back</span>
+    </a>
+    <main>
+        <div class="blog-container">
+            <h1 class="blog-title">New command processing</h1>
+            <h2 class="blog-subtitle">Date: 2024-01-15</h2>
+            <div class="blog-content">
+                <h1>Jarvis: Building a Voice Assistant</h1><p>When I watched <em>Iron Man</em>, I was captivated by Tony Stark’s AI assistant, Jarvis. The idea of having a voice assistant that not only responded to commands, optimized daily tasks, and improved productivity—but also communicated in a human manner—sparked my imagination. This blog post is a journey through my process of creating my very own Jarvis, an AI-powered assistant designed for real-world functionality.</p><hr><h2>The Inspiration: Beyond a Novelty</h2><p>Many voice assistants today can tell you the time or give you a weather forecast. I envisioned something far more profound—an assistant that could genuinely optimize my workflow by automating routine tasks and seamlessly integrating with my computer to control it. My goal was clear: Jarvis should not be just a novelty but a powerful tool that enhances productivity and simplifies complex tasks.</p><hr><h2>The Journey: Building the Core</h2><p>Creating Jarvis required more than just plugging together off-the-shelf solutions. I needed a robust foundation capable of handling the nuances of natural language processing and command recognition. After multiple iterations and refining the core logic, I finally developed a system that supports the features I envisioned.</p><h3>Wake Word Detection</h3><p>To ensure fast activation, I integrated <strong>Picovoice AI</strong> for wake word detection. Detecting a single word from the sound flow is much faster than processing continuous speech. Below is an excerpt from the <code>listen</code> method that continuously monitors for the wake word:</p><hr><div class="code-container">
+    <pre><code class="language-python">```python
+def listen(self):
+    self.recorder.start()
+    while self.active:
+        pcm = self.recorder.read()
+        keyword_index = self.porcupine.process(pcm)
+        if keyword_index >= 0:
+            self.event_queue.put(('detected', 'Jarvis'))
+    self.recorder.stop()</code></pre>
+</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Prism Core JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <!-- Prism Language Support for Python -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+    <script src="../dark-mode.js"></script>
+
+</body>
+</html>

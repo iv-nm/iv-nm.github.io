@@ -43,8 +43,9 @@
             <h2>Projects</h2>
             <ul>
                 <li><a href="jarvis.html">Jarvis: Voice Assistant with integrated neural networks for controlling computer</a></li>
+                <li><a href="videoScape.html">VideoScape: Live wallpaper app</a></li>
                 <li><a href="#">Telegram Bot: Telegram messenger bot for voice messages to text</a></li>
-                <li><a href="#">Boardgame app: Boardgames score counter for competing with friends</a></li>
+
             </ul>
         </section>
 
@@ -75,38 +76,41 @@
     <!-- Full-screen preview JavaScript -->
     <script src="dark-mode.js"></script>
     <script>
-        const images = document.querySelectorAll('.artwork-collage img');
-        const overlay = document.getElementById('fullScreenOverlay');
-        const fullScreenImage = document.getElementById('fullScreenImage');
+const images = document.querySelectorAll('.artwork-collage img');
+const overlay = document.getElementById('fullScreenOverlay');
+const fullScreenImage = document.getElementById('fullScreenImage');
 
-        images.forEach(image => {
-            image.addEventListener('click', () => {
-                fullScreenImage.src = image.src;
-                overlay.style.display = 'flex';
-                setTimeout(() => {
-                    overlay.classList.add('show');
-                }, 10); // Small delay to allow the transition effect
-            });
-        });
+images.forEach(image => {
+    image.addEventListener('click', () => {
+        fullScreenImage.src = image.src;
+        overlay.style.display = 'flex';
+        // A small delay for the transition effect
+        setTimeout(() => {
+            overlay.classList.add('show');
+        }, 10);
+    });
+});
 
-        const closeOverlay = () => {
-            overlay.classList.remove('show');
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 300); // Match this delay with the transition duration
-        };
+const closeOverlay = () => {
+    overlay.classList.remove('show');
+    // Wait for the transition to finish before hiding the overlay
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 300); // Make sure this matches your CSS transition duration
+};
 
-        overlay.addEventListener('click', (event) => {
-            if (event.target !== fullScreenImage) {
-                closeOverlay();
-            }
-        });
+// Close overlay when clicking (or tapping) anywhere in the overlay
+overlay.addEventListener('click', () => {
+    closeOverlay();
+});
 
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' || event.key === ' ') {
-                closeOverlay();
-            }
-        });
+// Also close overlay on Esc key press
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closeOverlay();
+    }
+});
+
     </script>
 </body>
 </html>
