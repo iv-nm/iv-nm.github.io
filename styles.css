@@ -139,6 +139,9 @@ nav a:not(:last-child)::after {
     background-color: var(--nav-divider-color);
 }
 
+
+
+
 /* Main content container */
 main,
 .writings,
@@ -444,6 +447,44 @@ audio {
     transform: scale(1);
 }
 
+.filter-nav a.filter {
+    color: var(--filter-color);
+    margin: 0 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.filter-nav a.filter:first-child {
+    margin-left: 20px; /* Remove left margin for the first filter */
+}
+
+
+
+
+.filter-nav a.filter:hover {
+    color: var(--filter-hover-color);
+}
+
+.filter-nav a.filter.selected {
+    color: var(--filter-selected-color);
+}
+
+#blog-list {
+    max-width: 850px;
+    margin: 0 auto;
+
+    list-style: none;
+}
+
+#blog-list li {
+    margin-bottom: 0px;
+    padding-left: 20px;
+    margin: 10px 0;
+
+}
+
+
 
 
 /* ---------------------------------------------------------------------------
@@ -455,9 +496,12 @@ audio {
         margin: 10px;
         max-width: 100%;
     }
-    h1,h2 {
+
+    
+    h2 {
         text-align: left;
         font-size: 1.3em;
+        margin-top: 20px;
     }
     p {
         font-size: 0.9rem;
@@ -474,10 +518,7 @@ audio {
         white-space: pre-wrap;
     }
     /* Home link remains left-aligned */
-    .home-link-icon {
-        text-align: left;
- 
-    }
+
     ul li a {
         font-size: 0.9rem;
     }
@@ -488,3 +529,19 @@ audio {
         max-width: 100%;
         margin: 0 auto;
     }
+
+    #blog-list {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+        padding-left: 20px;
+        list-style: none;
+    }
+    
+    #blog-list li {
+        margin-bottom: 0px;
+        padding-left: 0px;
+        margin: 10px 0;
+    
+    }
+}
