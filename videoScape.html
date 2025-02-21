@@ -26,47 +26,29 @@
 
     <h1>VideoScape: Bringing Videos to Your macOS Desktop</h1>
 
-    <p>Growing up, I always wanted my workspace to reflect my personality. I’d rearrange icons, switch up wallpapers, and try out screensavers—constantly searching for that perfect vibe. But the idea of having an actual video background always stuck in my mind. Whenever I attempted to use a video as a wallpaper, the apps I tried either restricted my choices or bogged me down with needless complexity. I wanted something simpler, something that felt truly mine. That was the spark for creating <strong>VideoScape</strong>: a lightweight, hassle-free app that transforms any video into your macOS wallpaper.</p>
+    <p>I always wanted to set a video as mac wallpaper. Whenever I attempted to use a video as a wallpaper, the apps I tried either restricted my choices or bogged me down with needless complexity. I wanted something simpler. A simple tool that alows to set live wallpapers for free</p>
 
-    <h2>The Vision: A Desktop That’s Truly Yours</h2>
-    <p>Most wallpaper apps give you a handful of preset animations or try to push you toward curated content. But the real magic happens when you get to decide exactly what’s on your desktop. Whether it’s a timelapse you shot on vacation, a mesmerizing loop you found online, or a personal video that motivates you, <strong>VideoScape</strong> is about freedom of choice. There shouldn’t be any barriers—just grab a video, drag it in, and watch it come to life on your screen.</p>
-
-    <h2>The Journey: Building the Core</h2>
-    <p>Designing a tool that integrates video playback with macOS’s wallpaper system wasn’t straightforward. Static images behave one way; videos behave in a totally different way—especially when it comes to the menu bar and multiple monitors. So I had to get creative with how I layered the video behind the icons, ensuring it felt seamless and avoided unnecessary resource usage.</p>
+    <h2>Building the Core</h2>
+    <p>Designing a tool that integrates video playback with macOS’s wallpaper system wasn’t straightforward. Static images behave one way; videos behave in a totally different way—especially when it comes to the menu bar and multiple monitors. So I had to get creative with how I layered the video behind the icons, ensuring it felt seamless and avoided unnecessary resource usage, because mac is not provided with these features.</p>
     <p>I explored several approaches: from creating hidden windows for each display to leveraging AVPlayer. Eventually, I found a system that balanced performance with flexibility—running a lightweight player on each screen, looping the video as needed, and caching a static frame so the desktop still looks consistent whenever the video fades in or out.</p>
 
-    <h2>The Experience: Bringing Videos to Life</h2>
-    <p>A major part of the experience comes from how <strong>VideoScape</strong> handles transitions and screen changes. When you drag a video into <em>VideoScape</em>, the app creates a security-scoped bookmark to ensure your chosen file remains accessible—no matter where you move it or how often you reboot your Mac. Then, behind the scenes, it fetches a frame from the video to serve as a static preview. That way, your wallpaper never just “disappears” if you pause or toggle off the live video.</p>
-    <p>I also focused on making multi-monitor setups smoother, so <strong>VideoScape</strong> replicates the wallpaper across every screen with minimal overhead. The aim is that each monitor becomes a window into your creative world, rather than an afterthought.</p>
+    <h2>Setting videos</h2>
+    <p>A major part of the experience comes from how <strong>VideoScape</strong> handles transitions and screen changes. When you drag a video into <em>VideoScape</em>, the app creates a security-scoped bookmark to ensure your chosen file remains accessible—no matter where you move it or how often you reboot your Mac. Then, it fetches a frame from the video to serve as a static preview. That way, your wallpaper never just “disappears” if you pause or toggle off the live video.</p>
+    <p>I also focused on making multi-monitor setups smoother, so <strong>VideoScape</strong> replicates the wallpaper across every screen with minimal overhead.</p>
 
     <h2>Overcoming the Menu Bar Challenge</h2>
-    <p>You might have noticed how the macOS menu bar sometimes struggles with high-motion wallpapers—it can suddenly turn solid, lose transparency, or mismatch with text. This happens because macOS isn’t natively optimized for video wallpapers; it’s expecting static images. I experimented with color sampling and system toggles, but the truth is, until Apple opens the door for live desktop adjustments, it remains a bit finicky.</p>
-    <p>Here’s what I recommend to keep things looking clean:</p>
-    <ul>
-      <li><strong>Manually switch between Light and Dark Mode</strong> to match your video’s brightness.</li>
-      <li><strong>Choose calmer videos near the top edge</strong> (if possible) so text remains readable.</li>
-      <li><strong>Try “Reduce Transparency” in Accessibility</strong> to help stabilize the appearance—just note it affects the entire UI.</li>
-    </ul>
-    <p>It’s not perfect, but these steps make the overall experience smoother until macOS officially supports video-based wallpapers.</p>
+    <p>MacOS menu bar wasn't same color as the video. This happens because macOS isn’t natively optimized for video wallpapers; it’s expecting static images. I experimented with color sampling and system toggles, but the truth is, until Apple opens the door for live desktop adjustments, it remains a bit finicky.</p>
+   
+    <p>While it’s not perfect, but it's the smoothest solution I could made for now. Before set the video, I make static stopframe of it and set it as static wallpaper, then I use video as overlay. Analyzing how other apps work, I understtod that they do essentially the same thing</p>
 
-    <h2>Behind the Scenes: Designing the VideoScape Icon</h2>
-    <p>Just like the wallpaper itself, the icon needed to communicate motion and possibility. I went through multiple iterations—concept sketches inspired by film reels, swirling shapes, and simplified video symbols. Eventually, I settled on an icon that feels cinematic and clean, hinting at the app’s core purpose: bringing videos to your desktop. Icon design is a balancing act between clarity and creativity, and I’m excited to share more details about this process in a dedicated post soon.</p>
+    <h2>Designing the VideoScape Icon</h2>
+    <p>I went through multiple iterations—concept sketches. Eventually, I settled on an icon that feels simple and clean, hinting at the app’s core purpose: bringing videos easily to your desktop.</p>
 
     <h2>Under the Hood: Code Snippets & Process</h2>
-    <p>If you’re curious about how <strong>VideoScape</strong> manages file access and wallpaper transitions, here’s a quick look at some key functions:</p>
+    <p>If you’re curious about how <strong>VideoScape</strong> manages file access and wallpaper transitions, here’s a <span class="text_link"><a href="https://github.com/iv-nm/VideoScape">github link</a></span> to VideoScape repository</p>
 
-    <div class="code-container">
-      <pre><code class="language-swift">
-// Example: handleDrop(_:) handles file drops and creates a secure bookmark
-func handleDrop(_ providers: [NSItemProvider]) -> Bool {
-    // ... 
-    // when you drop a file in, it sets up the security bookmark
-    // then calls setWallpaperFromBookmarkedVideo(...)
-}
-      </code></pre>
-    </div>
 
-    <p>Through these few functions, the app takes your dropped video, securely bookmarks it, and then seamlessly applies it as your wallpaper. I’ll dive deeper into the full workflow and performance optimizations in an upcoming post.</p>
+    <p>Through these few functions, the app takes your dropped video, securely bookmarks it, and then seamlessly applies it as your wallpaper. I’ll dive deeper into the full workflow in upcoming blog posts.</p>
 
    
     <!-- Prism Core JS -->
